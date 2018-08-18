@@ -8,7 +8,8 @@ const MovieList = (props) => {
         props.poster === null ? 
             <div className="movie">
                 <img src="https://cdn.browshot.com/static/images/not-found.png" alt={title} />
-                <button>Favorite</button>
+                <hr />
+                <button onClick={() => props.handleFavorite(movieID)}>Favorite</button>
             </div> 
             :
             <div className="movie">

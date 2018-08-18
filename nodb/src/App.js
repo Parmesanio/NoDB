@@ -109,10 +109,12 @@ class App extends Component {
       <header>
       <Search searchInput={this.state.searchInput} handleTextChange={this.handleTextChange} onSubmit={this.onSubmit} componentDidMount={this.componentDidMount} />
       </header>
+      {favorites.length > 0 ? 
       <section className="favorites">
       <h2>Favorites</h2>
       {favoritesList}
       </section>
+      : null}
       <div className="moviecomponent">
         {omList}
         {/* {fakeMoviesList}  */}

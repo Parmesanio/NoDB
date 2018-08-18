@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+}
 .App {
   text-align: center;
 }
@@ -10,13 +16,56 @@ header {
 }
 input {
   padding: 10px 15px;
+  border: none;
+  height: 40px;
+}
+header input {
+
+}
+button {
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+}
+header button {
+  background: #fff;
+  border-left: 1px solid;
+  color: sandybrown;
+  height: 40px;
 }
 .moviecomponent {
   width: 70%;
   margin: 0 auto;
   display: inline-block;
 }
+.moviecomponent button {
+  background: sandybrown;
+  border-radius: 3px;
+  color: #fff;
+  padding: 10px 20px;
+  transition: all 0.35s;
+}
+hr {
+  color: sandybrown;
+  margin: 1em 0;
+}
+.moviecomponent button:hover {
+  box-shadow: 0 0 0 2px #eee, 0 0 0 4px #DE7A22, 0 0 0 6px #eee, 0 0 0 8px #F4CC70;
+}
 .favorites {
   width: 30%;
   float: left;
+  margin: 1em 0;
+}
+.favorites h2 {
+  margin: 1em 0;
+}
+.favorites > div {
+  text-align: left;
+}
+.favorites input {
+  width: 60%;
+}
+.favorites button {
+  margin-right: 1em;
 }
