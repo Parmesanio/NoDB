@@ -13,51 +13,61 @@ class App extends Component {
       fakeMovies: [],
       movieList: [],
       favorites: [],
-      searchInput: '',
-      isValid: false
+      searchInput: ''
      }
      this.handleTextChange = this.handleTextChange.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
      this.componentDidMount = this.componentDidMount.bind(this);
      this.handleFavorite = this.handleFavorite.bind(this);
+     this.handleDelete = this.handleDelete.bind(this);
+     this.handleUpdate = this.handleUpdate.bind(this);
   }
   componentDidMount() {
-    //Fake Movies
-    axios.get('/api/fakemovies')
-      .then(res => {
-        console.log(res.data);
-        this.setState({
-          fakeMovies: res.data
+    //GET Favorites List
+    axios.get('/api/movies/favorites')
+      .then(getResponse => {this.setState({
+          favorites: getResponse.data
         })
       })
-      //OMDb API
       if(this.state.searchInput.length > 3) {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e0948fc9937b09ded80d7c05693d8de7&query=${this.state.searchInput}`)
-        .then(res => {
-          this.setState({
-            movieList: res.data.results
-          })
-          return axios.post('/api/movies', {res})
-            .then(res => {
-              console.log(res);
+        .then(getResponse => {
+          //POST data to server
+          return axios.post('/api/movies', {getResponse})
+            .then(postResponse => {
+              this.setState({
+                movieList: postResponse.data[0].results
+              })
             })
+            .catch(function (error) {
+              console.log(error);
+            });
         })
       } 
   }
   handleFavorite(id) {
-    // let { favorites, movieList } = this.state;
-    // let newList = favorites.concat();
-    // let favMovie = movieList.find(movie =>  movie.id === id);
-    // let newObj = {
-    //   title: favMovie.title,
-    //   id: favMovie.id
-    // }
-    // newList.push(newObj);
-    // this.setState({
-    //   favorites: newList,
-    //   isValid: true
-    // })
-    
+    let { movieList } = this.state;
+    let favMovie = movieList.find(movie => movie.id === id);
+    axios.post("/api/movies/favorites", {favMovie})
+      .then(postResponse => {
+        this.setState({
+          favorites: postResponse.data
+        })
+      })
+  }
+  handleDelete(id) {
+    axios.delete(`/api/movies/favorites/${id}`)
+      .then(deleteResponse => {
+        this.setState({
+          favorites: deleteResponse.data
+        })
+      })
+  }
+  handleUpdate(id, title) {
+    axios.put(`/api/movies/favorites/${id}`, {title})
+      .then(updateResponse => {
+        console.log(updateResponse);
+      })
   }
   handleTextChange(event) {
     this.setState({
@@ -65,13 +75,11 @@ class App extends Component {
     })
   }
   onSubmit(event) {
-    console.log('Fired');
-    
     event.preventDefault();
   }
   render() { 
     //Deconstruct from state
-    let { fakeMovies, movieList, favorites, isValid } = this.state
+    let { fakeMovies, movieList, favorites } = this.state
 
     let fakeMoviesList = fakeMovies.map(fake => {
       //Deconstruct 'fake' object
@@ -90,12 +98,22 @@ class App extends Component {
       let { title, poster_path, overview, id } = movie;
       return <MovieList key={id} movieID={id} title={title} poster={poster_path} desc={overview} handleFavorite={this.handleFavorite} />
     })
+
+    let favoritesList = favorites.map(fav => {
+      let { id } = fav;
+      return <Favorites key={id} favMovie={fav} handleDelete={this.handleDelete} handleUpdate={this.handleUpdate} />;
+    })
     
     return (
       <div className="App">
-      {isValid ? <Favorites favList={favorites} /> : null}
+      <header>
+      <Search searchInput={this.state.searchInput} handleTextChange={this.handleTextChange} onSubmit={this.onSubmit} componentDidMount={this.componentDidMount} />
+      </header>
+      <section className="favorites">
+      <h2>Favorites</h2>
+      {favoritesList}
+      </section>
       <div className="moviecomponent">
-        <Search searchInput={this.state.searchInput} handleTextChange={this.handleTextChange} onSubmit={this.onSubmit} componentDidMount={this.componentDidMount} />
         {omList}
         {/* {fakeMoviesList}  */}
         </div>

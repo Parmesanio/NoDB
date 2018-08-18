@@ -1,25 +1,34 @@
-import React from 'react';
+import React, {Component} from 'react';
 
-const Favorites = (props) => {
-    let { favList } = props;
-    console.log(favList);
-    
-
-    let favCollection = favList.map(fav => {
-        let { title, id} = fav;
-        return (
-            <div key={id}>
-            <p>{title}</p>
-            <button>Delete</button>
-            </div>
-        )
-    });
+class Favorites extends Component {
+    constructor(props) {
+        super();
+        this.state = {
+            userTitle: ''
+        }
+    }
+    handleTextChange(event) {
+        console.log(event.target.value);
+        
+        this.setState({
+            userTitle: event.target.value
+        })
+    }
+    render() {
+        let { userTitle } = this.state;
+        let { favMovie } = this.props;
+        let { title, id} = favMovie;
+        //Tiny image in list?
     return ( 
         <div>
-            <h1>Favorites</h1>
-            {favCollection}
+            <div>
+            <input type="text" value={userTitle} placeholder={title} onChange={(event) => this.handleTextChange(event)} />
+            <button onClick={() => this.props.handleUpdate(id, userTitle)}>Rename</button>
+            <button onClick={() => this.props.handleDelete(id)}>Delete</button>
+            </div>
         </div>
      );
+    }
 }
  
 export default Favorites;

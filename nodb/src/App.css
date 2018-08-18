@@ -1,7 +1,22 @@
 .App {
   text-align: center;
 }
+header {
+  height: 70px;
+  background: sandybrown;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  padding: 10px 15px;
+}
 .moviecomponent {
   width: 70%;
   margin: 0 auto;
+  display: inline-block;
+}
+.favorites {
+  width: 30%;
+  float: left;
 }

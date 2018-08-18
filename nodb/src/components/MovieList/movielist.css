@@ -1,7 +1,6 @@
 .movie {
     display: inline-block;
     margin: 1em;
-    height: 414px;
     width: 15%;
     vertical-align: text-bottom;
 }

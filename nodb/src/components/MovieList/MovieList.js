@@ -3,9 +3,9 @@ import './movielist.css';
 
 const MovieList = (props) => {
     let { title, poster, movieID, desc} = props;
-    
+
     return ( 
-        props.poster === "N/A" ? 
+        props.poster === null ? 
             <div className="movie">
                 <img src="https://cdn.browshot.com/static/images/not-found.png" alt={title} />
                 <button>Favorite</button>
