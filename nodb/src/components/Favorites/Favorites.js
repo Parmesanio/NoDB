@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './favorites.css';
 
 class Favorites extends Component {
     constructor(props) {
@@ -8,8 +9,6 @@ class Favorites extends Component {
         }
     }
     handleTextChange(event) {
-        console.log(event.target.value);
-        
         this.setState({
             userTitle: event.target.value
         })
@@ -23,8 +22,8 @@ class Favorites extends Component {
         <div>
             <div>
             <input type="text" value={userTitle} placeholder={title} onChange={(event) => this.handleTextChange(event)} />
-            <button onClick={() => this.props.handleUpdate(id, userTitle)}>Rename</button>
-            <button onClick={() => this.props.handleDelete(id)}>Delete</button>
+            <button className="edit" onClick={() => this.props.handleUpdate(id, userTitle)}>Rename</button>
+            <button className="delete" onClick={() => this.props.handleDelete(id)}>Delete</button>
             </div>
         </div>
      );

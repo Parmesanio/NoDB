@@ -1,29 +1,9 @@
-let movieList = []
-// {
-    //     Title: "Atom",
-    //     Year: "2018",
-    //     Type: 'Horror',
-    //     Poster: "https://cdn.freebiesupply.com/logos/large/2x/atom-4-logo-png-transparent.png",
-    //     id: 0
-    // },
-    // {
-    //     Title: "Visual Studio Code",
-    //     Year: "2018",
-    //     Type: 'Action & Adventure',
-    //     Poster: "https://cdn.freebiesupply.com/logos/large/2x/atom-4-logo-png-transparent.png",
-    //     id: 0
-    // }
-let favorites = [
-
-]
-
-
+let movieList = [];
+let favorites = [];
+let photos = [];
 
 module.exports = {
     //GET
-    read: (req, res) => {
-        res.status(200).send(movieList);
-    },
     readFavorites: (req, res) => {
         res.status(200).send(favorites);
     },

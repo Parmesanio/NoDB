@@ -10,40 +10,41 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      fakeMovies: [],
       movieList: [],
       favorites: [],
       searchInput: ''
      }
      this.handleTextChange = this.handleTextChange.bind(this);
      this.onSubmit = this.onSubmit.bind(this);
-     this.componentDidMount = this.componentDidMount.bind(this);
+     this.handleGetMovies = this.handleGetMovies.bind(this);
      this.handleFavorite = this.handleFavorite.bind(this);
      this.handleDelete = this.handleDelete.bind(this);
      this.handleUpdate = this.handleUpdate.bind(this);
   }
   componentDidMount() {
-    //GET Favorites List
+      //GET Favorites List
     axios.get('/api/movies/favorites')
-      .then(getResponse => {this.setState({
-          favorites: getResponse.data
-        })
+    .then(getResponse => {this.setState({
+        favorites: getResponse.data
       })
-      if(this.state.searchInput.length > 3) {
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e0948fc9937b09ded80d7c05693d8de7&query=${this.state.searchInput}`)
-        .then(getResponse => {
-          //POST data to server
-          return axios.post('/api/movies', {getResponse})
-            .then(postResponse => {
-              this.setState({
-                movieList: postResponse.data[0].results
-              })
+    }) 
+  }
+  handleGetMovies() {
+    if(this.state.searchInput.length > 3) {
+      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e0948fc9937b09ded80d7c05693d8de7&query=${this.state.searchInput}`)
+      .then(getResponse => {
+        //POST data to server
+        return axios.post('/api/movies', {getResponse})
+          .then(postResponse => {
+            this.setState({
+              movieList: postResponse.data[0].results
             })
-            .catch(function (error) {
-              console.log(error);
-            });
-        })
-      } 
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      })
+    }
   }
   handleFavorite(id) {
     let { movieList } = this.state;
@@ -75,23 +76,13 @@ class App extends Component {
     })
   }
   onSubmit(event) {
+    //Prevent form from refreshing page
     event.preventDefault();
   }
   render() { 
     //Deconstruct from state
-    let { fakeMovies, movieList, favorites } = this.state
-
-    let fakeMoviesList = fakeMovies.map(fake => {
-      //Deconstruct 'fake' object
-      let { Title, Year, Type, Poster, id} = fake;
-      return (
-        <div key={id}>
-          <img src={Poster} alt={Title} />
-          <h1>{Title} - {Year}</h1>
-          <p>{Type}</p>
-        </div>
-      )
-    })
+    let { movieList, favorites } = this.state
+    
 
     let omList = movieList.map(movie => {
       //Deconstruct 'movie' object
@@ -106,9 +97,7 @@ class App extends Component {
     
     return (
       <div className="App">
-      <header>
-      <Search searchInput={this.state.searchInput} handleTextChange={this.handleTextChange} onSubmit={this.onSubmit} componentDidMount={this.componentDidMount} />
-      </header>
+      <Search searchInput={this.state.searchInput} handleTextChange={this.handleTextChange} onSubmit={this.onSubmit} handleGetMovies={this.handleGetMovies} />
       {favorites.length > 0 ? 
       <section className="favorites">
       <h2>Favorites</h2>
@@ -117,7 +106,6 @@ class App extends Component {
       : null}
       <div className="moviecomponent">
         {omList}
-        {/* {fakeMoviesList}  */}
         </div>
 
         </div>

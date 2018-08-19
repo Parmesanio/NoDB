@@ -1,0 +1,33 @@
+.favorites {
+    width: 30%;
+    float: left;
+    margin: 1em 0;
+}
+.favorites h2 {
+    margin: 1em 0;
+}
+.favorites > div {
+    text-align: left;
+    border-bottom: 1px solid;
+    margin: 1em;
+}
+.favorites input {
+    width: 60%;
+}
+.favorites button {
+    border-radius: 3px;
+    margin-right: 1em;
+    padding: 8px;
+}
+.delete {
+    background: hsl(202, 16%, 13%);
+    color: #fff;
+    transition: all 0.35s;
+}
+.delete:hover {
+    background: red;
+}
+.edit {
+    background: #ff9a00;
+    color: #fff;
+}

@@ -7,7 +7,6 @@ const express           = require('express'),
 app.use(bodyParser.json());
 
 //GET
-app.get('/api/fakemovies', mC.read);
 app.get('/api/movies/favorites', mC.readFavorites);
 
 //POST

@@ -8,13 +8,14 @@ const MovieList = (props) => {
         props.poster === null ? 
             <div className="movie">
                 <img src="https://cdn.browshot.com/static/images/not-found.png" alt={title} />
+                <p className="desc">{desc}</p>
                 <hr />
                 <button onClick={() => props.handleFavorite(movieID)}>Favorite</button>
             </div> 
             :
             <div className="movie">
                 <img src={`https://image.tmdb.org/t/p/w500${poster}`} alt={title} />
-                {/* <p>{desc}</p> */}
+                <p className="desc">{desc}</p>
                 <hr />
                 <button onClick={() => props.handleFavorite(movieID)}>Favorite</button>
             </div> 
