@@ -7,6 +7,17 @@ module.exports = {
     readFavorites: (req, res) => {
         res.status(200).send(favorites);
     },
+    getDetails: (req, res) => {
+        let what = movieList.map(e => e.results)
+        
+        let { id } = req.params;
+         let movie = what[0].find(movie => movie.id == id);
+         
+
+         if (movie !== -1) {
+             res.status(200).send(movie);
+         }
+    },
     //POST
     create: (req, res) => {
         movieList = [];

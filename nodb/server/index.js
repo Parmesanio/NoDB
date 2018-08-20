@@ -8,6 +8,7 @@ app.use(bodyParser.json());
 
 //GET
 app.get('/api/movies/favorites', mC.readFavorites);
+app.get('/api/details/:id', mC.getDetails);
 
 //POST
 app.post('/api/movies', mC.create);

@@ -1,0 +1,32 @@
+.details {
+    background: #1c2327;
+    color: #ccc;
+    height: 100vh;
+    text-align: center;
+}
+hr {
+    color: #ff9a00;
+    margin: 1em auto;
+    width: 40%;
+}
+.detailsdesc {
+    border-left: 1px solid #ff9a00;
+    margin: 1em auto;
+    width: 40%;
+    padding: 20px;
+    text-align: left;
+}
+.detailsimg {
+    position: absolute;
+    top: 10%;
+    left: 25%;
+}
+.info {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
+.link {
+    color: #ccc;
+    text-decoration: none;
+}

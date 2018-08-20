@@ -1,5 +1,6 @@
 import React from 'react';
 import './movielist.css';
+import {Link} from 'react-router-dom';
 
 const MovieList = (props) => {
     let { title, poster, movieID, desc} = props;
@@ -11,6 +12,7 @@ const MovieList = (props) => {
                 <p className="desc">{desc}</p>
                 <hr />
                 <button onClick={() => props.handleFavorite(movieID)}>Favorite</button>
+                <Link className="hide" to={`/api/movies/${movieID}`}><button>Info</button></Link>
             </div> 
             :
             <div className="movie">
@@ -18,6 +20,7 @@ const MovieList = (props) => {
                 <p className="desc">{desc}</p>
                 <hr />
                 <button onClick={() => props.handleFavorite(movieID)}>Favorite</button>
+                <Link className="hide" to={`/api/movies/${movieID}`}><button>Info</button></Link>
             </div> 
      );
 }

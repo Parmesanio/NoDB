@@ -8,7 +8,9 @@
     border-radius: 3px;
     color: #fff;
     font-size: 0.9em;
+    margin: 1em;
     padding: 12px 30px;
+    width: 117.583px;
     transition: all 0.35s;
   }
   hr {
@@ -36,7 +38,7 @@
     font-size: .9em;
     position: absolute;
     top: 0;
-    bottom: 16%;
+    bottom: 21%;
     right: 0;
     left: 0;
     text-align: justify;
@@ -45,4 +47,10 @@
   }
   .desc:hover {
       opacity: 1;
+  }
+
+  @media only screen and (min-width: 1300px) {
+    .movie {
+      width: 25%;
+    }
   }
